@@ -1,10 +1,11 @@
-class Producto {
+export default class Producto {
     constructor(codigo, nombre, descripcion, cantidad, costo){
-        codigo = this.codigo
-        nombre = this.nombre
-        descripcion = this.descripcion
-        cantidad = this.cantidad
-        costo = this.costo
+        this.codigo = codigo
+        this.nombre = nombre 
+        this.descripcion = descripcion  
+        this.cantidad = cantidad 
+        this.costo = costo 
+        this.siguiente = null
     }
 }
 
