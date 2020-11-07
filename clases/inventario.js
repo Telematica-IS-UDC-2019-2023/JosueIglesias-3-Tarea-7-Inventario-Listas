@@ -38,7 +38,7 @@ export default class Inventario {
             if (t.siguiente.codigo === cod){
                 t.siguiente = t.siguiente.siguiente
             } else {
-                alert ('no se de q ablas crkaak')
+                alert ('Producto no encontrado')
             }
         } 
     }
@@ -67,22 +67,52 @@ export default class Inventario {
         }
         return concat
     }
+    
+    listarInverso(){
+        let t = this.inicio
+        let c = 1
+        while(t.siguiente != null){
+            t = t.siguiente
+            c++
+        }
+        let concat = "" + t.nombre
+        c = c - 1
+        while (c > 0){
+            let i = 1
+            t = this.inicio
+            while (i < c){
+                t = t.siguiente
+                i++
+            }
+            concat += " " + t.nombre 
+            c--
+        }
 
-    //listarInverso()
+        return concat
+    }
+
     insertarProducto(nuevo, posicion){
         let t = this.inicio
-        let i = 1
-        while ((i + 1) != posicion){
-            t = t.siguiente
-            i++
-        } 
-
-        if ((i+1) === posicion){
-            nuevo.siguiente = t.siguiente
-            t.siguiente = nuevo
+        if (posicion === 1){
+            this.agregarInicio(nuevo)
+        } else {
+            let i = 1
+            while ((i + 1) != posicion){
+                if (t.siguiente != null){
+                    t = t.siguiente
+                    i++
+                } else {
+                    alert('Posición inválida')
+                    break
+                }
+            } 
+    
+            if ((i+1) === posicion){
+                nuevo.siguiente = t.siguiente
+                t.siguiente = nuevo
+            }
         }
     }
-    
 }
 
 

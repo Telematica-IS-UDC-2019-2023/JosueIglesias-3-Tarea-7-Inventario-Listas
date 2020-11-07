@@ -16,8 +16,31 @@ Los métodos de eliminar se deben trabajar de forma que además de eliminar el e
 import Inventario from "./clases/inventario.js"
 import Producto from "./clases/producto.js"
 var btnAgregar = document.querySelector('#btnAgregar')
+var btnEliminar = document.querySelector('#btnEliminar')
+var btnAgregarInicio = document.querySelector('#btnAgregarInicio')
+var btnEliminarPrimero = document.querySelector('#btnEliminarPrimero')
+var btnBuscar = document.querySelector('#btnBuscar')
+var btnListar = document.querySelector('#btnListar')
+var btnListarInv = document.querySelector('#btnListarInv')
+var btnInsertar = document.querySelector('#btnInsertar')
+var posicionInsertar = document.querySelector('#posicionInsertar')
+
+var nombreProducto = document.querySelector('#nombreProducto')
+var codigoProducto = document.querySelector('#codigoProducto')
+var descripcionProducto = document.querySelector('#descripcionProducto')
+var cantidadProducto = document.querySelector('#cantidadProducto')
+var costoProducto = document.querySelector('#costoProducto')
+
+var inventario = new Inventario
+
 btnAgregar.addEventListener('click', () =>{
+    let producto = new Producto(codigoProducto.value,nombreProducto.value,descripcionProducto.value,Number(cantidadProducto.value),Number(costoProducto.value))
     
+    inventario.agregarProducto(producto)
+
+    console.log(inventario)
+
+    /*
     let inv = new Inventario()
 
     let p1 = new Producto(1,1,1,1,1)
@@ -37,15 +60,51 @@ btnAgregar.addEventListener('click', () =>{
     //inv.agregarInicio(p4)
     //inv.agregarInicio(p5)
     //inv.agregarProducto(p6)
-
     //inv.eliminarProducto(2)
     //inv.eliminarProducto(1)
-
     //inv.eliminarPrimero()
-
     //console.log(inv.buscarProducto(4))
-    
-    inv.insertarProducto(p5, 2)
-    console.log(inv)
+    //inv.insertarProducto(p5, 2)
 
+    //console.log(inv)
+    console.log(inv.listarInverso())
+    console.log(inv.listarProductos())
+*/
+
+})
+
+btnEliminar.addEventListener('click', () =>{
+    let codigo = codigoProducto.value
+    inventario.eliminarProducto(codigo)
+    console.log(inventario)
+})
+
+btnAgregarInicio.addEventListener('click', () =>{
+    let producto = new Producto(codigoProducto.value,nombreProducto.value,descripcionProducto.value,Number(cantidadProducto.value),Number(costoProducto.value))
+    inventario.agregarInicio(producto)
+    console.log(inventario)
+})
+
+btnEliminarPrimero.addEventListener('click', () =>{
+    inventario.eliminarPrimero()
+    console.log(inventario)
+})
+
+btnBuscar.addEventListener('click', () =>{
+    let codigo = codigoProducto.value
+    console.log(inventario.buscarProducto(codigo))
+})
+
+btnListar.addEventListener('click', () =>{
+    console.log(inventario.listarProductos())
+})
+
+btnListarInv.addEventListener('click', () =>{
+    console.log(inventario.listarInverso())
+})
+
+btnInsertar.addEventListener('click', () =>{
+    let producto = new Producto(codigoProducto.value,nombreProducto.value,descripcionProducto.value,Number(cantidadProducto.value),Number(costoProducto.value))
+    inventario.insertarProducto(producto, Number(posicionInsertar.value))
+    console.log(inventario)
 })
