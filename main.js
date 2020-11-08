@@ -31,6 +31,7 @@ var etDescripcion = document.querySelector('#etDescripcion')
 var etCantidad = document.querySelector('#etCantidad')
 var etCosto = document.querySelector('#etCosto')
 var etLista = document.querySelector('#etLista')
+var etEstado = document.querySelector('#etEstado')
 
 
 var nombreProducto = document.querySelector('#nombreProducto')
@@ -45,7 +46,7 @@ btnAgregar.addEventListener('click', () =>{
     let producto = new Producto(codigoProducto.value,nombreProducto.value,descripcionProducto.value,Number(cantidadProducto.value),Number(costoProducto.value))
     
     inventario.agregarProducto(producto)
-
+    etEstado.innerHTML = "Producto agregado: " + producto.nombre
     console.log(inventario)
 
     /*
@@ -83,17 +84,20 @@ btnAgregar.addEventListener('click', () =>{
 
 btnEliminar.addEventListener('click', () =>{
     let codigo = codigoProducto.value
+    etEstado.innerHTML = "Producto eliminado: " + inventario.buscarProducto(codigo).nombre
     inventario.eliminarProducto(codigo)
     console.log(inventario)
 })
 
 btnAgregarInicio.addEventListener('click', () =>{
     let producto = new Producto(codigoProducto.value,nombreProducto.value,descripcionProducto.value,Number(cantidadProducto.value),Number(costoProducto.value))
+    etEstado.innerHTML = "Agregado a inicio: " + producto.nombre
     inventario.agregarInicio(producto)
     console.log(inventario)
 })
 
 btnEliminarPrimero.addEventListener('click', () =>{
+    etEstado.innerHTML = "Eliminado primero: " + inventario.inicio.nombre
     inventario.eliminarPrimero()
     console.log(inventario)
 })
@@ -102,6 +106,7 @@ btnBuscar.addEventListener('click', () =>{
     let codigo = codigoProducto.value
     console.log(inventario.buscarProducto(codigo))
     let producto = inventario.buscarProducto(codigo)
+    etEstado.innerHTML = "Producto buscado: " + producto.nombre
     etNombre.innerHTML = "Nombre: " + producto.nombre
     etCodigo.innerHTML = "Código: " + producto.codigo
     etDescripcion.innerHTML = "Descripción: " + producto.descripcion
@@ -123,4 +128,5 @@ btnInsertar.addEventListener('click', () =>{
     let producto = new Producto(codigoProducto.value,nombreProducto.value,descripcionProducto.value,Number(cantidadProducto.value),Number(costoProducto.value))
     inventario.insertarProducto(producto, Number(posicionInsertar.value))
     console.log(inventario)
+    etEstado.innerHTML = "Producto insertado: " + producto.nombre
 })
