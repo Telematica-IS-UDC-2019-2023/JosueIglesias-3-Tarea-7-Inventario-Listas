@@ -53,7 +53,7 @@ export default class Inventario {
             t = t.siguiente
         }
         if (t.codigo === cod){
-            return t.nombre
+            return t
         }
     }
 
@@ -114,15 +114,3 @@ export default class Inventario {
         }
     }
 }
-
-
-
-/* -Agregar nuevo producto (al final)
--Eliminar un producto por código
--Buscar un producto por código
--Recuperar todos los productos //listar 
--Recuperar todos los productos en orden inverso //listar inverso
--Permitir indicar una posición para insertar el producto en esa posición (no es un reemplazar) y solo se puede insertar si hay elementos en la posición indicada
-Se agregan los siguientes botones
--Agregar al inicio
--Eliminar el primero*/

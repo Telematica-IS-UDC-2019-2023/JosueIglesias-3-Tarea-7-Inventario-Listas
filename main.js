@@ -25,6 +25,14 @@ var btnListarInv = document.querySelector('#btnListarInv')
 var btnInsertar = document.querySelector('#btnInsertar')
 var posicionInsertar = document.querySelector('#posicionInsertar')
 
+var etNombre = document.querySelector('#etNombre')
+var etCodigo = document.querySelector('#etCodigo')
+var etDescripcion = document.querySelector('#etDescripcion')
+var etCantidad = document.querySelector('#etCantidad')
+var etCosto = document.querySelector('#etCosto')
+var etLista = document.querySelector('#etLista')
+
+
 var nombreProducto = document.querySelector('#nombreProducto')
 var codigoProducto = document.querySelector('#codigoProducto')
 var descripcionProducto = document.querySelector('#descripcionProducto')
@@ -93,14 +101,22 @@ btnEliminarPrimero.addEventListener('click', () =>{
 btnBuscar.addEventListener('click', () =>{
     let codigo = codigoProducto.value
     console.log(inventario.buscarProducto(codigo))
+    let producto = inventario.buscarProducto(codigo)
+    etNombre.innerHTML = "Nombre: " + producto.nombre
+    etCodigo.innerHTML = "Código: " + producto.codigo
+    etDescripcion.innerHTML = "Descripción: " + producto.descripcion
+    etCantidad.innerHTML = "Cantidad: " + producto.cantidad
+    etCosto.innerHTML = "Costo: " + producto.costo
 })
 
 btnListar.addEventListener('click', () =>{
     console.log(inventario.listarProductos())
+    etLista.innerHTML = "Productos: " + inventario.listarProductos()
 })
 
 btnListarInv.addEventListener('click', () =>{
     console.log(inventario.listarInverso())
+    etLista.innerHTML = "Productos: " + inventario.listarInverso()
 })
 
 btnInsertar.addEventListener('click', () =>{
