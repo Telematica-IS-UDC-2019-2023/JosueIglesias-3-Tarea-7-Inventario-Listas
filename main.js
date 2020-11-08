@@ -32,6 +32,7 @@ var etCantidad = document.querySelector('#etCantidad')
 var etCosto = document.querySelector('#etCosto')
 var etLista = document.querySelector('#etLista')
 var etEstado = document.querySelector('#etEstado')
+var etMercancia = document.querySelector('#etMercancia')
 
 
 var nombreProducto = document.querySelector('#nombreProducto')
@@ -41,49 +42,23 @@ var cantidadProducto = document.querySelector('#cantidadProducto')
 var costoProducto = document.querySelector('#costoProducto')
 
 var inventario = new Inventario
+var sumMerc = 0
 
 btnAgregar.addEventListener('click', () =>{
     let producto = new Producto(codigoProducto.value,nombreProducto.value,descripcionProducto.value,Number(cantidadProducto.value),Number(costoProducto.value))
-    
+    sumMerc += producto.cantidad * producto.costo
+    etMercancia.innerHTML = "Valor mercancía: " + "$" + sumMerc
     inventario.agregarProducto(producto)
     etEstado.innerHTML = "Producto agregado: " + producto.nombre
     console.log(inventario)
-
-    /*
-    let inv = new Inventario()
-
-    let p1 = new Producto(1,1,1,1,1)
-    let p2 = new Producto(2,2,2,2,2)
-    let p3 = new Producto(3,3,3,3,3)
-    let p4 = new Producto(4,4,4,4,4)
-    let p5 = new Producto(5,5,5,5,5)
-    let p6 = new Producto(6,6,6,6,6)
-    let p7 = new Producto(7,7,7,7,7)
-
-
-    inv.agregarProducto(p1)
-    inv.agregarProducto(p2)
-    inv.agregarProducto(p3)
-    inv.agregarProducto(p4)
-
-    //inv.agregarInicio(p4)
-    //inv.agregarInicio(p5)
-    //inv.agregarProducto(p6)
-    //inv.eliminarProducto(2)
-    //inv.eliminarProducto(1)
-    //inv.eliminarPrimero()
-    //console.log(inv.buscarProducto(4))
-    //inv.insertarProducto(p5, 2)
-
-    //console.log(inv)
-    console.log(inv.listarInverso())
-    console.log(inv.listarProductos())
-*/
 
 })
 
 btnEliminar.addEventListener('click', () =>{
     let codigo = codigoProducto.value
+    let producto = inventario.buscarProducto(codigo)
+    sumMerc -= producto.costo * producto.cantidad
+    etMercancia.innerHTML = "Valor mercancía: " + "$" + sumMerc
     etEstado.innerHTML = "Producto eliminado: " + inventario.buscarProducto(codigo).nombre
     inventario.eliminarProducto(codigo)
     console.log(inventario)
@@ -91,6 +66,8 @@ btnEliminar.addEventListener('click', () =>{
 
 btnAgregarInicio.addEventListener('click', () =>{
     let producto = new Producto(codigoProducto.value,nombreProducto.value,descripcionProducto.value,Number(cantidadProducto.value),Number(costoProducto.value))
+    sumMerc += producto.costo * producto.cantidad
+    etMercancia.innerHTML = "Valor mercancía: " + "$" + sumMerc
     etEstado.innerHTML = "Agregado a inicio: " + producto.nombre
     inventario.agregarInicio(producto)
     console.log(inventario)
@@ -98,6 +75,8 @@ btnAgregarInicio.addEventListener('click', () =>{
 
 btnEliminarPrimero.addEventListener('click', () =>{
     etEstado.innerHTML = "Eliminado primero: " + inventario.inicio.nombre
+    sumMerc -= inventario.inicio.costo * inventario.inicio.cantidad
+    etMercancia.innerHTML = "Valor mercancía: " + "$" + sumMerc
     inventario.eliminarPrimero()
     console.log(inventario)
 })
